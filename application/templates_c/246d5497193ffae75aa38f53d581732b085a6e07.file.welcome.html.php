@@ -1,0 +1,118 @@
+<?php /* Smarty version Smarty-3.1.14, created on 2013-10-16 16:10:26
+         compiled from "application\views\welcome.html" */ ?>
+<?php /*%%SmartyHeaderCode:11592525e43e6200858-20923688%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '246d5497193ffae75aa38f53d581732b085a6e07' => 
+    array (
+      0 => 'application\\views\\welcome.html',
+      1 => 1381911023,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '11592525e43e6200858-20923688',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.14',
+  'unifunc' => 'content_525e43e62d3785_34577892',
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_525e43e62d3785_34577892')) {function content_525e43e62d3785_34577892($_smarty_tpl) {?><!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>腾讯微云</title>
+        <meta name="keywords" content="微信上的接口服务供应商" />
+        <meta name="description" content="微信上的接口服务供应商" />
+        <meta name="viewport" content="height=device-height,width=320,initial-scale=1.0,mininum-scale=1.0,maximum-scale=1.0,user-scaleble=no" />
+        <script type="text/javascript" src="http://oss.aliyuncs.com/kunrou/static/js/jquery.1.9.1.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://weixin.kunrou.net/template/default/css/public.css?20131010" />
+        <link rel="stylesheet" type="text/css" href="http://weixin.kunrou.net/template/default/css/bootstrap.min.css?20131010" />
+        <link rel="stylesheet" type="text/css" href="http://weixin.kunrou.net/template/default/css/mod_app.css?20131010" />
+        <script type="text/javascript" src="http://weixin.kunrou.net/template/default/js/sitecommon.js?20131010"></script>
+        <script type="text/javascript" src="http://weixin.kunrou.net/template/default/js/mod_app.js?20131010"></script>
+        <!--[if lte IE 9]>
+                <link rel="stylesheet" type="text/css" href="/template/includes/js/iealert/style.css?20130611" />
+                <script type="text/javascript" src="/template/includes/js/iealert.js?20130611"></script>
+            <script src="//cdnjs.bootcss.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+        <![endif]-->
+        <link href="http://kunrou.oss.aliyuncs.com/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <script type="text/javascript">
+            var _CF = {
+                mod: 'app',
+                act: 'index',
+                type: 'index',
+                exturl: '?AppID=12345831',
+                AppID: '12345831',
+                id: 0};
+        </script>
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+        <script type="text/javascript">
+                $(document).ready(function() {
+                        $("body").iealert();
+                });
+        </script>
+        <![endif]-->
+        <a name="top"></a>
+        <div class="container">
+            <div  class="page-header">
+                <h1>腾讯&middot;微云 <small>用户管理中心</small></h1>
+            </div>	
+            <div class="row">
+                <?php echo $_smarty_tpl->getSubTemplate ('menu.html', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+
+                <div class="span9">
+                    <div class="well">
+                        <div class="form-horizontal" id="appindex">
+                            <div class="hero-unit">
+                                <h2>您现在正在管理【下拉模板】微信公众帐号</h2>
+                                <p>该帐号于 <span class="label label-success"> <i class="icon-time icon-white"></i>  2013-09-11 16:09:09</span> 创建，
+                                    到期时间为： <span class="label label-warning"> <i class="icon-time icon-white"></i>  2014-09-11 16:09:09</span></p>
+                                <p>共发生请求<i class="icon-random"></i> <span class="badge badge-info">11</span> 次，
+                                    今日为：<i class="icon-retweet"></i> <span class="badge badge-inverse">11</span> 次</p>
+                                <p>
+                                <h5>请登录<a href="https://mp.weixin.qq.com" target="_blank">微信公众平台</a>
+                                    ，关闭编辑模式，进入开发模式（务必先上传头像和设置微信号），在接口配置信息中，
+                                    设置URL和Token为以下参数提示正确，然后点击开启开发模式即可：
+                                </h5>
+                                <h5>URL：<span class="badge badge-success">http://weixin.kunrou.net/weixin/12345831.api</span></h5>
+                                <h5>TOKEN：<span class="badge badge-warning">nnUi1jG8FeHH7BK3wrMzq5xy</span></h5>
+                                <h5>设置后请在手机中关注该微信公众账号，回复“hi”，若返回“hello”，则说明设置已经生效，您可以继续在这里设置其他自定义内容。</h5>
+                                </p>
+                                <div class="raw appindexnav">
+                                    <a href="/app/setreply.html?AppID=12345831" class="btn btn-large btn-primary">设置自定义回复</a>
+                                    <a href="/app/microsite.html?AppID=12345831" class="btn btn-large btn-info">开通企业微网站</a>
+                                    <a href="/app/crm.html?AppID=12345831" class="btn btn-large btn-success">设置会员二维码</a>
+                                    <a href="/app/guagua.html?AppID=12345831" class="btn btn-large btn-warning">管理刮刮卡活动</a>
+                                    <a href="/app/rotate.html?AppID=12345831" class="btn btn-large btn-inverse">管理大转盘活动</a>
+                                </div>
+                            </div>
+                        </div>				
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var navac = '';
+            $('#topnav >li').each(function() {
+                if ($(this).hasClass(navac)) {
+                    $(this).addClass('active');
+                }
+            });
+        </script>
+        <footer class="footer">
+            <?php echo $_smarty_tpl->getSubTemplate ('foot.html', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+
+        </footer>
+        <a name="buttom"></a>
+        <script src="http://kunrou.oss.aliyuncs.com/static/js/bootstrap.min.js?20131010"></script>
+        <div style="display:none"><script type="text/javascript" src="/template/default/js/jszc.js?20131010"></script></div>
+    </body>
+</html><?php }} ?>
