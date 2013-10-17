@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+
+
+
+	<title>MP_Cache: User Guide | mp_simple</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="content-language" content="en">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="Robots" content="index,follow">
+	<link rel="shortcut icon" href="http://mpsimple.mijnpraktijk.com/favicon.ico" type="image/x-icon">
+	<link href="user_guide_files/transdmin.css" rel="stylesheet" type="text/css" media="screen">
+	<!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="http://mpsimple.mijnpraktijk.com/css/admin/ie6.css" /><![endif]-->
+	<!--[if IE 7]><link rel="stylesheet" type="text/css" media="screen" href="http://mpsimple.mijnpraktijk.com/css/admin/ie7.css" /><![endif]-->
+	<script type="text/javascript" src="user_guide_files/jquery.js"></script>
+	<script type="text/javascript" src="user_guide_files/jNice.js"></script>
+	<style>
+pre {
+    color: #003471;
+    padding : 10px;
+    font-family: Courier New, Courier;
+    font-size: 11px;
+    margin : 10px 0 10px 20px;
+    background : #f6f6f6;
+    border : 1px dashed #003471;
+}
+</style></head><body>
+	<div id="wrapper">
+
+    	<!-- h1 tag stays for the logo, you can use the a tag for linking the index page -->
+    	<div style="clear: both;">
+    		<img src="user_guide_files/mp_simple.jpg" style="padding: 15px 0pt; width: 930px; height: 74px;" alt="mp_simple">
+    	</div>
+        
+        <!-- You can name the links with lowercase, they will be transformed to uppercase by CSS, we prefered to name them with uppercase to have the same effect with disabled stylesheet -->
+        <ul id="mainNav">
+<li><a href="http://mpsimple.mijnpraktijk.com/homepage.htm">Homepage</a></li><li><a href="http://mpsimple.mijnpraktijk.com/mp_search.htm">MP_Search</a></li><li><a href="http://mpsimple.mijnpraktijk.com/mp_cache.htm" class="active">MP_Cache</a></li><li><a href="http://mpsimple.mijnpraktijk.com/license.htm">License</a></li><li><a href="http://mpsimple.mijnpraktijk.com/download.htm">Download</a></li><li class="logout"><a href="http://mpsimple.mijnpraktijk.com/credits.htm">Credits</a></li>	</ul>
+        <!-- // #end mainNav -->
+        
+        <div id="containerHolder">
+			<div id="container">
+        		<div id="sidebar" style="min-height: 300px;">
+                	<ul class="sideNav">
+<li><a href="http://mpsimple.mijnpraktijk.com/mp_cache/code.htm">The Code</a></li><li><a href="http://mpsimple.mijnpraktijk.com/mp_cache/user_guide.htm" class="active">User Guide</a></li>                    </ul>
+                    <div style="margin: 15px 0pt; text-align: center;">
+
+                    <a href="http://www.pledgie.com/campaigns/3622">
+                    <img src="user_guide_files/3622.png" alt="" border="0">
+                    </a></div>
+                    <!-- // .sideNav -->
+                </div>    
+                <!-- // #sidebar -->                
+                <!-- h2 stays for breadcrumbs -->
+
+                <h2>MP_Cache: User Guide</h2>
+
+                <div id="main" style="margin-top: 10px;">
+<!-- BEGIN CONTENT -->
+<p>MP_Cache was written as a more flexible caching solution than those
+offered by CodeIgniter. As such it offers you a way to cache anything
+from a single variable, to a SQL query or the fully generated page.
+MP_Cache saves these entries serialized to files and has functions to
+retrieve and delete these.</p><p>Additionally you can set expiration
+time and dependencies to force a main cache to refresh itself after one
+of its subcaches has been refreshed or deleted.</p><h3>Installing MP_Cache</h3><ul><li>Download the file <a href="http://mpsimple.mijnpraktijk.com/MP_Cache.zip">here</a> and unzip it to your <strong>application/libraries</strong> directory.</li><li>Create a directory for you cache, for example <strong>application/mp_cache</strong></li><li>Add a value 'mp_cache_dir' to an autoloaded config file, for instance <strong>application/config/config.php</strong> and set it to the mp_cache directory relative to your index.php file.<br><em>For example: $config['mp_cache_dir'] = APPPATH.'mp_cache/';</em></li><li><em>Optional:</em>
+add a value 'mp_cache_default_expires' to the same autoloaded config
+file and set it to a default expiration time in seconds if you want it
+set by default. You can still make something never expire by setting it
+to 0.</li><li>That's it, you can start using MP_Cache.</li></ul><h3>Initializing MP_Cache</h3><p>Like most other classes in CodeIgniter, the MP_Cache class is initialized in your controller using the <strong>$this-&gt;load-&gt;library function</strong>:</p><pre>$this-&gt;load-&gt;library('MP_Cache');</pre><p>Once the library is loaded it will be ready for use. The MP_Cache library object you will use to call all functions is: <strong>$this-&gt;mp_cache</strong>.</p><h3>Basic caching without additional settings</h3><p>To just cache something within your controller or model, the usage is like this:</p><pre>$data = $this-&gt;mp_cache-&gt;get('example');<br>if ($data === false)<br>{<br>&nbsp;&nbsp;&nbsp; <em>// example model-function that generates your $data variable</em><br>&nbsp;&nbsp;&nbsp; $data = $this-&gt;Pages-&gt;read($page);<br>&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; $this-&gt;mp_cache-&gt;write($data, 'example');<br>}</pre><p>The variable to be cached can be of any kind, though object-references will be lost when loaded from cache.</p><h3>Alternative syntax for the example above</h3><p>You can also use the cache in a more object oriented way. In this case you always <strong>call the set_name() method before any other</strong> because it will reset the object to its default state.</p><pre>$data = $this-&gt;mp_cache-&gt;set_name('example')-&gt;get();<br><br>if ($data === false)<br>{<br> &nbsp;&nbsp;&nbsp; <em>// example model-function that generates your $data variable</em><br>&nbsp;&nbsp;&nbsp; $data = $this-&gt;Pages-&gt;read($page);<br>&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; $this-&gt;mp_cache-&gt;set_contents($data)-&gt;write();<br>}</pre><p><em><strong>Warning:</strong>
+You can't combine the syntaxes, using the parameterized versions of
+write() and get() will reset the mp_cache object to prevent
+contamination of your current cache operation from a previous one.</em></p><h3>Using subdirectories</h3><p>For
+PHP5 subdirectories with virtual unlimited depth are supported, PHP4
+only supports 1 level. You can set subdirectories by simply adding them
+in the cache name. The first line of the alternative syntax example is
+below in the directory "<em>directory</em>" which in turn is in the directory "<em>sub</em>".</p><pre>$data = $this-&gt;mp_cache-&gt;set_name('sub/directory/example')-&gt;get();</pre><h3>Adding an expiration time</h3><p>Expiration
+time is added when writing the cache. Exparation is set to 0 by default
+which means no experation. If you want it to expire after a certain
+time you have to specify it in seconds after it was generated. To do so
+you have to change the write function like this when using the <strong>write()</strong> function with parameters:</p><pre><em>// Cache it for 2 hours (7200 seconds = 60 seconds * 60 minutes * 2 hours)</em><br>$this-&gt;mp_cache-&gt;write($data, 'example', 7200);</pre><p>Or do it by using the <strong>set_expires()</strong> function:</p><pre>$this-&gt;mp_cache-&gt;set_name('example')-&gt;set_contents($data)-&gt;set_expires(7200)-&gt;write();</pre><h3>Adding dependencies</h3><p>You
+can add cache file on which the expiration of the current cache file is
+dependend. When one of those files has been deleted or refreshed after
+the current cache was made, the current cache will be deleted. So lets
+say we have a menu called <strong>mainmenu </strong>which we have cached in a subdirectory called <strong>menus</strong>. Using the parameterized <strong>write()</strong> function you can add the dependency like this (expiration set to none):</p><pre>$this-&gt;mp_cache-&gt;write($data, 'example', null, array('menus/mainmenu'));</pre><p>Or using the <strong>set_dependencies()</strong> function (which takes an array or a string):</p><pre>$this-&gt;mp_cache-&gt;set_name('example')-&gt;set_contents($data)-&gt;set_dependencies('menus/mainmenu')-&gt;write();</pre><h3>Deleting individual caches</h3><p>You can delete cache by using the <strong>delete()</strong> function:</p><pre>$this-&gt;mp_cache-&gt;delete('example');</pre><p>Or in the alternative way:</p><pre>$this-&gt;mp_cache-&gt;set_name('example')-&gt;delete();</pre><h3>Deleting the entire cache or subdirectories of it</h3><p>To delete the entire cache you can use the <strong>delete_all()</strong> function:</p><pre>$this-&gt;mp_cache-&gt;delete_all();</pre><p>Or you can delete a subdirectory of the main cache, like all the menus from the example for dependencies:</p><pre>$this-&gt;mp_cache-&gt;delete_all('menus');</pre><p>This will delete all the files in the subdirectory <strong>menus</strong> of the main cache. All the subdirectories of the <strong>menus</strong> directory and files within them will also be deleted.</p><h3 style="font-size: 1.5em;">Full functions overview</h3><h3>reset()</h3><p>Resets
+the current state of the mp_cache object. It is called automatically
+from the set_name() function or when the write() &amp; get() functions
+are used with parameters. This is done to prevent any previous usage of
+the mp_cache object from contaminating your current usage with settings
+you would expect to be the default ones.</p><pre>$this-&gt;mp_cache-&gt;reset();</pre><h3>set_name() &amp; get_name()</h3><p>Sets or returns the full filename of the cache.<br><em><strong>Warning:</strong> the set_name() function automatically calls reset(), so always use it as the first function when using the alternative syntax.</em></p><pre>$this-&gt;mp_cache-&gt;set_name('example');<br><em>// after this is set the variable below will be set to the string 'example'</em><br>$var = $this-&gt;mp_cache-&gt;get_name();</pre><h3>set_contents() &amp; get_contents()</h3><p>Sets or returns the contents you are caching or retrieving.</p><pre>$this-&gt;mp_cache-&gt;set_contents(array(1,2,3,4,5));<br><em>// The function below will return the array set above</em><br>$array = $this-&gt;mp_cache-&gt;get_contents();</pre><h3>set_dependencies(), add_dependencies() &amp; get_dependencies()</h3><p>Sets the dependencies, adds to the current dependencies or returns the set dependencies.</p><pre>$this-&gt;mp_cache-&gt;set_dependencies('example');<br><em>// this sets the dependencies to the 'example' cache file</em><br>$this-&gt;mp_cache-&gt;set_dependencies(array('cachefile1', 'cachefile2'));<br><em>// this has overwritten the first statement and set the dependencies to 'cachefile1' &amp; 'cachefile2'</em><br>$this-&gt;mp_cache-&gt;add_dependencies('example')<br><em>// this has added 'example' as a dependency in addition to 'cachefile1' &amp; 'cachefile2'</em></pre><p>All functions take both strings and arrays of strings.</p><h3>set_expires() &amp; get_expires()</h3><p>Sets the expiration time and retrieves the time on which the cache will expire.</p><pre>$this-&gt;mp_cache-&gt;set_expires(7200);<br><em>// sets the expiration to a timestamp 2 hours from now</em><br>$expires = $this-&gt;mp_cache-&gt;get_expires();<br><em>// $expires is set to the timestamp 2 hours from now as defined by set_expires()</em></pre><h3>get_created()</h3><p>Returns the timestamp from the moment the retrieved cache was created, returns NULL when used while writing cache.</p><pre>$created_on = $this-&gt;mp_cache-&gt;get_created();</pre><!-- EINDE CONTENT -->
+
+		</div>
+
+                <!-- // #main -->
+                
+                <div class="clear"></div>
+            </div>
+            <!-- // #container -->
+        </div>	
+        <!-- // #containerHolder -->
+        
+        <p id="footer" style="text-align: right;">This website is powered by <a href="http://mpsimple.mijnpraktijk.com/" target="_blank">mp_simple</a>.</p>
+
+    </div>
+    <!-- // #wrapper -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="user_guide_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-6377419-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body></html>

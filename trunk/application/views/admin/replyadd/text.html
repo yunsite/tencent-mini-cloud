@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>腾讯微云</title>
+        <meta name="keywords" content="微信上的接口服务供应商" />
+        <meta name="description" content="微信上的接口服务供应商" />
+        <meta name="viewport" content="height=device-height,width=320,initial-scale=1.0,mininum-scale=1.0,maximum-scale=1.0,user-scaleble=no" />
+        <script type="text/javascript" src="http://oss.aliyuncs.com/kunrou/static/js/jquery.1.9.1.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://weixin.kunrou.net/template/default/css/public.css?20131010" />
+        <link rel="stylesheet" type="text/css" href="http://weixin.kunrou.net/template/default/css/bootstrap.min.css?20131010" />
+        <link rel="stylesheet" type="text/css" href="http://weixin.kunrou.net/template/default/css/mod_app.css?20131010" />
+        <script type="text/javascript" src="http://weixin.kunrou.net/template/default/js/sitecommon.js?20131010"></script>
+        <script type="text/javascript" src="http://weixin.kunrou.net/template/default/js/mod_app.js?20131010"></script>
+        <!--[if lte IE 9]>
+                <link rel="stylesheet" type="text/css" href="/template/includes/js/iealert/style.css?20130611" />
+                <script type="text/javascript" src="/template/includes/js/iealert.js?20130611"></script>
+            <script src="//cdnjs.bootcss.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
+        <![endif]-->
+        <link href="http://kunrou.oss.aliyuncs.com/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <script type="text/javascript">
+            var _CF = {
+                mod: 'app',
+                act: 'setreplyadd',
+                type: 'text',
+                exturl: '?AppID=12345831',
+                AppID: '12345831',
+                id: 0};
+        </script>
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+        <script type="text/javascript">
+                $(document).ready(function() {
+                        $("body").iealert();
+                });
+        </script>
+        <![endif]-->
+        <a name="top"></a>
+        <div class="container">
+            <div  class="page-header">
+                <h1>腾讯&middot;微云 <small>用户管理中心</small></h1>
+            </div>	
+            <div class="row">
+                {include file='menu.html'}
+                <div class="span9">
+                    <div class="well">
+                        <div class="form-horizontal" id="appsetreplayadd">
+                            <form class="form-horizontal" id="form-message-info">
+                                <div class="control-group">
+                                    <label for="" class="control-label">关键字</label>
+                                    <div class="controls">
+                                        <input type="text" placeholder="每个关键词之间用空格隔开" value="" name="keyword" id="keyword" required="required" />
+                                        <span class="help">可以设置多个和单个，完全匹配时只支持一个关键字<br />
+                                            特殊关键字： <code class="tips insertkeyword" data-toggle="tooltip" title="点击使用该关键词">无法回答</code> 没有找到任何相关自定义回复的时候回答的问题，不过可能会影响其它功能，无法回答这个必须设置匹配模式为精准匹配<br />
+                                            <code class="tips insertkeyword" data-toggle="tooltip" title="点击使用该关键词">subscribe</code> 设置当用户关注您帐号时候的自动回复，建议设置为图文回复，必须为精准匹配模式<br />
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="retype" class="control-label">匹配模式</label>
+                                    <div class="controls">
+                                        <label class="radio">
+                                            <input type="radio" name="retype" required="required" id="retype1" value="one"/>
+                                            精准匹配，但是不区分字母在小写
+                                        </label>
+                                        <label class="radio">
+                                            <input type="radio" name="retype" required="required" id="retype2" value="all"/>
+                                            模糊匹配，只要包括关键字中文字即可
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="control-group ">
+                                    <label for="" class="control-label">回复的内容</label>
+                                    <div class="controls">
+                                        <textarea name="content" id="contentbox" row="5" col="80" style="display:block; height: 96px;" placeholder="请在这里输入你要回复的内容" required="required"></textarea>
+                                        <span class="help help-content">
+                                            如果想添加链接请输入：
+                                            <code class="inserttag" data-toggle="tooltip" title="会在微信中显示一个蓝色的链接">&lt;a href="链接地址"&gt;链接文字&lt;/a&gt;</code>
+                                            <br /> 如果想替换为关键字，请使用<code class="inserttag" data-toggle="tooltip" title="会替换为用户输入的关键词">[keyword]</code>
+                                            <br /> 如果想在文字中加入微网站的首页链接，请使用 <code class="inserttag" data-toggle="tooltip" title="会替换为微网站">&lt;a href="[HOMEURL]"&gt;打开微网站&lt;/a&gt;</code>
+                                            <br /> 外部链接中可以加入 <code class="inserttag" data-toggle="tooltip" title="URL连接中会加上一个类似OpenId=xxxxxx 这样的字符">OpenId=[openid]</code> 这是来自微信的原始ID
+                                            <br /> 双击这些特殊变量可以追加到内容框中。
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="alert" style="width: 70%; clear: both; margin: 8px auto;"></div>
+                                    <lbael class="control-label" for=""></lbael>
+                                    <div class="controls">
+                                        <input type="hidden" name="id" value="" />
+                                        <input type="hidden" name="type" value="text" />
+                                        <input type="hidden" name="savetype" value="setreplyadd" />
+                                        <input type="submit" class="btn btn-large btn-primary" value=" 提交 " />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>				
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var navac = '';
+            $('#topnav >li').each(function() {
+                if ($(this).hasClass(navac)) {
+                    $(this).addClass('active');
+                }
+            });
+        </script>
+        <footer class="footer">            
+            {include file='foot.html'}
+        </footer>
+        <a name="buttom"></a>
+        <script src="http://kunrou.oss.aliyuncs.com/static/js/bootstrap.min.js?20131010"></script>
+        <div style="display:none"><script type="text/javascript" src="/template/default/js/jszc.js?20131010"></script></div>
+    </body>
+</html>
